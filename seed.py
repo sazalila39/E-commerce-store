@@ -15,6 +15,7 @@ DB_NAME = 'database-1'
 DB_URL = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 
 engine = create_engine(DB_URL, echo=True)
+
 Session = sessionmaker(bind=engine)
 
 Base.metadata.create_all(engine)

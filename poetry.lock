@@ -278,3 +278,4 @@ files = [
 lock-version = "2.1"
 python-versions = ">=3.12"
 content-hash = "b84c06eb51770bd67713183f5fe48033500dcb0d6e1b6c18e83630c9afd854d9"
+content-hash = "610584006117d2140872a260b1e74df71b2b9adebfb4c30bd8e18c5a50969559"
