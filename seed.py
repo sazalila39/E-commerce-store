@@ -1,32 +1,35 @@
-import random
 import string
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.orm import sessionmaker, declarative_base
+import random
+import time
 
-engine = create_engine("", echo=True)
-SessionLocal = sessionmaker(bind=engine)
-Base = declarative_base()
+from sqlalchemy import create_engine
+from models import Base, CouponTable
+from sqlalchemy.orm import sessionmaker
 
-
-class CouponTable(Base):
-    __tablename__ = "coupons"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    code = Column(String(20), unique=True, nullable=False)
-    discount = Column(Integer, nullable=False)
-
+engine = create_engine('', echo=True)
+Session = sessionmaker(bind=engine)
 
 Base.metadata.create_all(engine)
 
 
-def seed_table():
-    session = SessionLocal()
+def seed_table(num_coupons):
+    session = Session()
 
-    session.bulk_save_objects([CouponTable(code=''.join(random.choices(string.ascii_uppercase + string.digits, k=10)), discount=random.randint(1,100)) for _ in range(1000)])
+    start = time.time()
+
+    session.bulk_save_objects([
+        CouponTable(
+            code=''.join(random.choices(string.ascii_uppercase + string.digits, k=10)),
+            discount=random.randint(1, 100)
+        )
+        for _ in range(num_coupons)
+    ])
+
     session.commit()
     session.close()
-    print("1000 coupons added")
+
+    print(f"{num_coupons} coupons have been added in {time.time() - start:.2f} seconds")
 
 
 if __name__ == "__main__":
-    seed_table()
-
+    seed_table(1000)
