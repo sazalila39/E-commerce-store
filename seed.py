@@ -1,29 +1,14 @@
 import string
 import random
 import time
-
-from sqlalchemy import create_engine
-from models import Base, CouponTable
-from sqlalchemy.orm import sessionmaker
-
-DB_USER = 'saraalila'
-DB_PASSWORD = 'dietcoke'
-DB_HOST = 'database-1.c3kwaqk88fkv.eu-west-1.rds.amazonaws.com'
-DB_PORT = 5432
-DB_NAME = 'database-1'
-
-DB_URL = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
-
-engine = create_engine(DB_URL, echo=True)
-
-Session = sessionmaker(bind=engine)
-
-Base.metadata.create_all(engine)
+from database import Database
+from models import CouponTable
 
 
 def seed_table(num_coupons):
-    session = Session()
-
+    db = Database()
+    db.connect()
+    session = db.get_session()
     start = time.time()
 
     session.bulk_save_objects([
