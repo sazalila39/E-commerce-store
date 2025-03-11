@@ -18,7 +18,7 @@ def generate_coupons(num_coupons):
 
 def seed_table(num_coupons):
     db = Database()
-    db.connect_sync()
+    db.connect()
     session = db.get_session()
 
     start = time.time()
@@ -33,13 +33,13 @@ def seed_table(num_coupons):
 async def seed_table_async(num_coupons):
     db = Database(async_mode=True)
     await db.connect_async()
-    session = db.get_session()
+    session = await db.get_session_async()
 
     start = time.time()
 
     session.add_all(generate_coupons(num_coupons))
     await session.commit()
-    await db.close()
+    await db.close_async()
 
     print(f"{num_coupons} coupons have been added in {time.time() - start:.2f} seconds")
 
