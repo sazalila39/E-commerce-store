@@ -2,17 +2,6 @@
 
 This project uses Poetry for dependency management, SQLAlchemy for database interactions, asyncio for asynchronous operations, and PostgreSQL as the database backend.
 
-### Required Dependencies
-
-```bash
-[tool.poetry.dependencies]
-python = ">=3.12"
-sqlalchemy = "^2.0.39"
-psycopg2-binary = "^2.9.10"
-asyncpg = "^0.30.0"
-python-dotenv = "^1.0.1"
-```
-
 ## Poetry Installation
 **1. Initialize poetry:**
 ```bash
