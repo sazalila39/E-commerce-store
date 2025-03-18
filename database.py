@@ -12,14 +12,14 @@ class Database:
         self.Session = None
 
     def connect(self):
-        config = dotenv_values("../../.env")
+        config = dotenv_values(".env")
         url = f'postgresql://{config["DB_USER"]}:{config["DB_PASSWORD"]}@{config["DB_HOST"]}:{config["DB_PORT"]}/{config["DB_NAME"]}'
 
         self.engine = create_engine(url, echo=True)
         self.Session = sessionmaker(bind=self.engine)
 
     async def connect_async(self):
-        config = dotenv_values("../../.env")
+        config = dotenv_values(".env")
         url = f'postgresql+asyncpg://{config["DB_USER"]}:{config["DB_PASSWORD"]}@{config["DB_HOST"]}:{config["DB_PORT"]}/{config["DB_NAME"]}'
 
         self.engine = create_async_engine(url, echo=True)
