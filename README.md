@@ -11,35 +11,22 @@ poetry init
 ```bash
 poetry install
 ```
-
-### Usage
-
-Create a `.env` file with your database credentials:
-```python
-DB_NAME=database_name
-DB_USER=user_name
-DB_PASSWORD=password
-DB_HOST=localhost
-DB_PORT=5432
-```
-Load environment variables from `.env`
-
-```python
-from dotenv import dotenv_values
-
-config = dotenv_values(".env") 
-```
-
-### Database Setup & Connection
-Install SQLAlchemy & Async Driver and connect to Postresql:
+## Alembic Setup
+1. Run once to initialize alembic:
 ```bash
-poetry add sqlalchemy asyncpg
-
-from sqlalchemy.ext.asyncio import create_async_engine
-engine = create_async_engine("postgresql+asyncpg://user:password@localhost/db", echo=True)
+alembic init alembic
 ```
-### AWS PostgreSQL Setup
-- Create RDS Instance:
+2. Create a new migration:
+```bash
+alembic revision --autogenerate -m "your message"
+```
+3. Apply migrations:
+```bash
+alembic upgrade head
+```
+
+## AWS PostgreSQL Setup
+- Create RDS Instance
 - Get Database Endpoint
 - Connect: ``` psql -h your-rds-endpoint -U your-username -d your-database-name ```
 
