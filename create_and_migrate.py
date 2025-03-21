@@ -9,3 +9,5 @@ def run_migrations():
 
 if __name__ == "__main__":
     run_migrations()
+
+# rename create_and_migrate and create file to execute this query
