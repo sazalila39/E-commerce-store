@@ -1,5 +1,6 @@
 from alembic.config import Config
 from alembic import command
+from database import Database
 
 
 def run_migrations():
@@ -7,7 +8,15 @@ def run_migrations():
     command.upgrade(alembic_cfg, "head")
 
 
-if __name__ == "__main__":
-    run_migrations()
+def create_tables():
+    db = Database()
+    db.create_tables()
 
-# rename create_and_migrate and create file to execute this query
+
+def main():
+    run_migrations()
+    create_tables()
+
+
+if __name__ == "__main__":
+    main()
